@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.23.0">
+    <meta name="project" content="deployer v0.1.0">
+    <title>Deployer.Instances — deployer v0.1.0</title>
+    <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
+    <script src="dist/sidebar_items-63e8504acb.js"></script>
+      <script src="docs_config.js"></script>
+    <script async src="dist/app-60a0c9f10e9e52eae31f.js"></script>
+  </head>
+  <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode') === 'true') document.body.className += ' night-mode'; } catch (e) { }</script>
+<div class="main">
+
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" title="Collapse/expand sidebar"></span>
+</button>
+
+<section class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <span class="icon-search" aria-hidden="true" title="Submit search"></span>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
+      <span class="icon-cross" aria-hidden="true" title="Cancel search"></span>
+    </button>
+    <label class="search-label">
+      <input name="q" type="text" id="search-list" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectDetails">
+      <a href="api-reference.html" class="sidebar-projectName">
+deployer      </a>
+      <strong class="sidebar-projectVersion">
+        v0.1.0
+      </strong>
+    </div>
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+      <h1>
+        Deployer.Instances <small class="app-vsn">(deployer v0.1.0)</small>
+      </h1>
+
+
+        <section id="moduledoc">
+<p>Main module for interacting with AWS.</p><p>These interactions include: preflight checks, launching instances, security group interaction, subnet interaction, and more.</p>        </section>
+
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#bootstrap/4">bootstrap(manifest, instance, private_key_path, known_hosts_path)</a>
+  </div>
+    <div class="summary-synopsis"><p>Bootstrap instance by installing dependencies and desired files in manifest.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#get_instance_status/1">get_instance_status(instance)</a>
+  </div>
+    <div class="summary-synopsis"><p>Get instance status.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#get_security_group/1">get_security_group(vpc_id)</a>
+  </div>
+    <div class="summary-synopsis"><p>Get security group selection from user by querying EC2 and asking for choice.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#get_subnet/1">get_subnet(vpc_id)</a>
+  </div>
+    <div class="summary-synopsis"><p>Get subnet selection from user by querying EC2 and asking for choice.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#get_vpc/1">get_vpc(vpc_id)</a>
+  </div>
+    <div class="summary-synopsis"><p>Checks if given vpc exists, Deployer doesn't current support creating vpcs</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#launch/3">launch(manifest, vpc_id, key_pair)</a>
+  </div>
+    <div class="summary-synopsis"><p>Launch ec2 instance after getting user input.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#preflight/1">preflight(vpc_id)</a>
+  </div>
+    <div class="summary-synopsis"><p>Run preflight to get user input for desired subnet and security group.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#run_instance/4">run_instance(manifest, subnet, security_group, key_pair)</a>
+  </div>
+    <div class="summary-synopsis"><p>Run instance defined in manifest.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#start_app/4">start_app(manifest, instance, private_key_path, known_hosts_path)</a>
+  </div>
+    <div class="summary-synopsis"><p>Start application that has been uploaded.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#wait_until_running/1">wait_until_running(instance)</a>
+  </div>
+    <div class="summary-synopsis"><p>Wait for instance to enter the running state.</p></div>
+</div>
+  </div>
+        </section>
+
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Functions          </h1>
+          <div class="functions-list">
+<section class="detail" id="bootstrap/4">
+  <div class="detail-header">
+    <a href="#bootstrap/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">bootstrap(manifest, instance, private_key_path, known_hosts_path)</h1>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>bootstrap(Deployer.Manifest, Deployer.Instance, <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) ::
+  :ok | :error</pre>
+      </div>
+
+<p>Bootstrap instance by installing dependencies and desired files in manifest.</p><h2 id="bootstrap/4-parameters" class="section-heading">
+  <a href="#bootstrap/4-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="o">*</span><span class="w"> </span><span class="n">manifest</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nc">Manifest</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="kn">use</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">deploy</span><span class="w">
+</span><span class="o">*</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nc">Instance</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">has</span><span class="w"> </span><span class="n">already</span><span class="w"> </span><span class="n">been</span><span class="w"> </span><span class="n">deployed</span><span class="w">
+</span><span class="o">*</span><span class="w"> </span><span class="n">private_key_path</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nc">Path</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">private</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="kn">use</span><span class="w"> </span><span class="p" data-group-id="2117121409-1">(</span><span class="n">private</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">key_pair</span><span class="p" data-group-id="2117121409-1">)</span><span class="w">
+</span><span class="o">*</span><span class="w"> </span><span class="n">known_hosts_path</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nc">Path</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">known</span><span class="w"> </span><span class="n">hosts</span><span class="w"> </span><span class="n">file</span></code></pre>  </section>
+</section>
+<section class="detail" id="get_instance_status/1">
+  <div class="detail-header">
+    <a href="#get_instance_status/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">get_instance_status(instance)</h1>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>get_instance_status(Deployer.Instance) :: Deployer.Instance | :error</pre>
+      </div>
+
+<p>Get instance status.</p><h2 id="get_instance_status/1-parameters" class="section-heading">
+  <a href="#get_instance_status/1-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="o">*</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nc">Instance</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">aws</span></code></pre>  </section>
+</section>
+<section class="detail" id="get_security_group/1">
+  <div class="detail-header">
+    <a href="#get_security_group/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">get_security_group(vpc_id)</h1>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>get_security_group(<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) ::
+  {:ok, Deployer.SecurityGroup} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+      </div>
+
+<p>Get security group selection from user by querying EC2 and asking for choice.</p><h2 id="get_security_group/1-parameters" class="section-heading">
+  <a href="#get_security_group/1-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="o">*</span><span class="w"> </span><span class="n">vpc_id</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nc">VPC</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="n">already</span><span class="w"> </span><span class="n">generated</span><span class="w"> </span><span class="n">ahead</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">time</span></code></pre>  </section>
+</section>
+<section class="detail" id="get_subnet/1">
+  <div class="detail-header">
+    <a href="#get_subnet/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">get_subnet(vpc_id)</h1>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>get_subnet(<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) :: {:ok, Deployer.Subnet} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+      </div>
+
+<p>Get subnet selection from user by querying EC2 and asking for choice.</p><h2 id="get_subnet/1-parameters" class="section-heading">
+  <a href="#get_subnet/1-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="o">*</span><span class="w"> </span><span class="n">vpc_id</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nc">VPC</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="n">already</span><span class="w"> </span><span class="n">generated</span><span class="w"> </span><span class="n">ahead</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">time</span></code></pre>  </section>
+</section>
+<section class="detail" id="get_vpc/1">
+  <div class="detail-header">
+    <a href="#get_vpc/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">get_vpc(vpc_id)</h1>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>get_vpc(<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) :: {:ok, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+      </div>
+
+<p>Checks if given vpc exists, Deployer doesn't current support creating vpcs</p><h2 id="get_vpc/1-parameters" class="section-heading">
+  <a href="#get_vpc/1-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="o">*</span><span class="w"> </span><span class="n">vpc_id</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nc">VPC</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="n">already</span><span class="w"> </span><span class="n">generated</span><span class="w"> </span><span class="n">ahead</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">time</span></code></pre>  </section>
+</section>
+<section class="detail" id="launch/3">
+  <div class="detail-header">
+    <a href="#launch/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">launch(manifest, vpc_id, key_pair)</h1>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>launch(Deployer.Manifest, <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) ::
+  {:ok, Deployer.Instance} | :error</pre>
+      </div>
+
+<p>Launch ec2 instance after getting user input.</p><h2 id="launch/3-parameters" class="section-heading">
+  <a href="#launch/3-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="o">*</span><span class="w"> </span><span class="n">manifest</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nc">Manifest</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="kn">use</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">deploy</span><span class="w">
+</span><span class="o">*</span><span class="w"> </span><span class="n">vpc_id</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nc">Id</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">vpc</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">launch</span><span class="w"> </span><span class="ow">in</span><span class="w">
+</span><span class="o">*</span><span class="w"> </span><span class="n">key_pair</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nc">EC2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">pair</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="kn">use</span><span class="w"> </span><span class="p" data-group-id="4128774017-1">(</span><span class="n">must</span><span class="w"> </span><span class="n">already</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">loaded</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">aws</span><span class="p" data-group-id="4128774017-1">)</span></code></pre>  </section>
+</section>
+<section class="detail" id="preflight/1">
+  <div class="detail-header">
+    <a href="#preflight/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">preflight(vpc_id)</h1>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>preflight(<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) ::
+  {:ok, Deployer.Subnet, Deployer.SecurityGroup} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+      </div>
+
+<p>Run preflight to get user input for desired subnet and security group.</p><h2 id="preflight/1-parameters" class="section-heading">
+  <a href="#preflight/1-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="o">*</span><span class="w"> </span><span class="n">vpc_id</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nc">Id</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">vpc</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">launch</span><span class="w"> </span><span class="ow">in</span></code></pre>  </section>
+</section>
+<section class="detail" id="run_instance/4">
+  <div class="detail-header">
+    <a href="#run_instance/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">run_instance(manifest, subnet, security_group, key_pair)</h1>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>run_instance(
+  Deployer.Manifest,
+  Deployer.Subnet,
+  Deployer.SecurityGroup,
+  <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()
+) :: {:ok, Deployer.Instance} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+      </div>
+
+<p>Run instance defined in manifest.</p><h2 id="run_instance/4-parameters" class="section-heading">
+  <a href="#run_instance/4-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="o">*</span><span class="w"> </span><span class="n">manifest</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nc">Manifest</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="kn">use</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">deploy</span><span class="w">
+</span><span class="o">*</span><span class="w"> </span><span class="n">subnet</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nc">Subnet</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">launch</span><span class="w"> </span><span class="ow">in</span><span class="w">
+</span><span class="o">*</span><span class="w"> </span><span class="n">security_group</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nc">Security</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">instance</span><span class="w">
+</span><span class="o">*</span><span class="w"> </span><span class="n">key_pair</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nc">EC2</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">pair</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="kn">use</span></code></pre>  </section>
+</section>
+<section class="detail" id="start_app/4">
+  <div class="detail-header">
+    <a href="#start_app/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">start_app(manifest, instance, private_key_path, known_hosts_path)</h1>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>start_app(Deployer.Manifest, Deployer.Instance, <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) ::
+  :ok | :error</pre>
+      </div>
+
+<p>Start application that has been uploaded.</p><h2 id="start_app/4-parameters" class="section-heading">
+  <a href="#start_app/4-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="o">*</span><span class="w"> </span><span class="n">manifest</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nc">Manifest</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="kn">use</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">deploy</span><span class="w">
+</span><span class="o">*</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nc">Instance</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">has</span><span class="w"> </span><span class="n">already</span><span class="w"> </span><span class="n">been</span><span class="w"> </span><span class="n">deployed</span><span class="w">
+</span><span class="o">*</span><span class="w"> </span><span class="n">private_key_path</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nc">Path</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">private</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="kn">use</span><span class="w"> </span><span class="p" data-group-id="4441369332-1">(</span><span class="n">private</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">key_pair</span><span class="p" data-group-id="4441369332-1">)</span><span class="w">
+</span><span class="o">*</span><span class="w"> </span><span class="n">known_hosts_path</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nc">Path</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">known</span><span class="w"> </span><span class="n">hosts</span><span class="w"> </span><span class="n">file</span></code></pre>  </section>
+</section>
+<section class="detail" id="wait_until_running/1">
+  <div class="detail-header">
+    <a href="#wait_until_running/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">wait_until_running(instance)</h1>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>wait_until_running(Deployer.Instance) :: Deployer.Instance</pre>
+      </div>
+
+<p>Wait for instance to enter the running state.</p><h2 id="wait_until_running/1-parameters" class="section-heading">
+  <a href="#wait_until_running/1-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="o">*</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nc">Instance</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">aws</span></code></pre>  </section>
+</section>
+          </div>
+        </section>
+      <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.23.0) for the
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank">Elixir programming language</a>.
+          </span>
+          <span class="line">
+            Designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          </span>
+        </p>
+        <p>
+            <a href="api-reference.html" title="API reference" class="line footer-button">API Reference</a>
+          <button class="line footer-button display-shortcuts-help">
+            Display keyboard shortcuts
+          </button>
+          <button class="line footer-button night-mode-toggle">
+            Toggle night mode
+          </button>
+          <button class="line footer-button display-quick-switch">
+            Go to a HexDocs package
+          </button>
+          <button class="line footer-button tooltips-toggle">
+            <span class="tooltips-option-disable">Disable tooltips</span>
+            <span class="tooltips-option-enable">Enable tooltips</span>
+          </button>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  </body>
+</html>

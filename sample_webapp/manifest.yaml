@@ -1,0 +1,17 @@
+name: "Sample Webapp"
+
+dependencies:
+  - docker.io
+
+username: "ubuntu"
+ami: "ami-0aef57767f5404a3c" #base ubuntu20
+instance_type: "t2.micro"
+
+copy_files:
+  - src: "docker_images/sample_app.tar"
+    dest: "sample_app.tar"
+
+start_cmds:
+  - sudo usermod -aG docker ubuntu
+  - sudo docker load -i sample_app.tar
+  - sudo docker run --restart=always -d --name webapp -p 80:80 webapp_sample:latest
