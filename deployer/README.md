@@ -18,7 +18,7 @@ Since this tool is intended to be used by developers and not devops/sre, the VPC
 
 A rough design of what the aws infrastructure would look like is this:
 
-![AWS Layout]("images/example_aws_layout.png")
+![AWS Layout](images/example_aws_layout.png)
 
 ## Building
 
